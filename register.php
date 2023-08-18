@@ -11,7 +11,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   try {
     $statement = $pdo->prepare("INSERT INTO users (username, email, password, phone) VALUES (?, ?, ?, ?)");
-    $statement->execute([$username, $email, $password, $phone]);
+    $statement->bindParam(1, $username);
+    $statement->bindParam(2, $email);
+    $statement->bindParam(3, $password);
+    $statement->bindParam(4, $phone);
+    $statement->execute();
     $_SESSION['success_message'] = "Registration successful!";
   } catch (PDOException $e) {
     $_SESSION['error_message'] = "Registration failed: " . $e->getMessage();
