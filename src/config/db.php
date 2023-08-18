@@ -1,5 +1,5 @@
 <?php
-$host = '%';
+$host = 'localhost';
 $db_name = 'task6';
 $username = 'username';
 $password = 'password';
@@ -10,4 +10,3 @@ try {
 } catch (PDOException $e) {
     die("Connection failed: " . $e->getMessage());
 }
-?>
