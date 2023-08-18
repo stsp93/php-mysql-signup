@@ -10,8 +10,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $phone = $_POST['phone'];
 
   try {
-    $stmt = $pdo->prepare("INSERT INTO users (username, email, password, phone) VALUES (?, ?, ?, ?)");
-    $stmt->execute([$username, $email, $password, $phone]);
+    $statement = $pdo->prepare("INSERT INTO users (username, email, password, phone) VALUES (?, ?, ?, ?)");
+    $statement->execute([$username, $email, $password, $phone]);
     $_SESSION['success_message'] = "Registration successful!";
   } catch (PDOException $e) {
     $_SESSION['error_message'] = "Registration failed: " . $e->getMessage();
@@ -58,9 +58,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       </div>
       <button type="submit" class="btn btn-primary">Register</button>
     </form>
+    <div>
+      Already registered ?
+      <a href="<?='/'.basename(__DIR__). '/login.php'?>" class="alert-link mt-2">Login here</a></div>
+    </div>
   </div>
 
-  <script src="./src/scripts/regValidation.js"></script>
+  <script src="./src/utility/validation.js"></script>
 </body>
 
 </html>

@@ -2,11 +2,24 @@ $('form').on('submit', function (e) {
     const { username, password, rePassword, phone, email } = Object.fromEntries(new FormData(this));
 
     try {
-        console.log(!validateLength(username));
         if (!validateLength(username)) {
             $('#username').addClass('border-danger');
         }else {
             $('#username').removeClass('border-danger');
+        }
+
+        if (!validateLength(password)) {
+            $('#password').addClass('border-danger');
+        }else {
+            $('#password').removeClass('border-danger');
+        }
+
+        // Block guard for register submit
+        if(rePassword === undefined || phone === undefined || email === undefined )  {
+            if($('.border-danger').length > 0) {
+                throw new Error('Invalid login format');
+            }
+            return;
         }
 
         if (!validateEmail(email)) {
@@ -19,12 +32,6 @@ $('form').on('submit', function (e) {
             $('#phone').addClass('border-danger');
         }else {
             $('#phone').removeClass('border-danger');
-        }
-
-        if (!validateLength(password)) {
-            $('#password').addClass('border-danger');
-        }else {
-            $('#password').removeClass('border-danger');
         }
 
         if(!rePassword || password !== rePassword) {
