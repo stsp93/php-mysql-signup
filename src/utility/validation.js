@@ -14,7 +14,7 @@ $('form').on('submit', function (e) {
             $('#password').removeClass('border-danger');
         }
 
-        // Block guard for register submit
+        // Block guard for login submit
         if(rePassword === undefined || phone === undefined || email === undefined )  {
             if($('.border-danger').length > 0) {
                 throw new Error('Invalid login format');
