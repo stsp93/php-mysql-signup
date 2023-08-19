@@ -3,6 +3,7 @@ require('./src/config/db.php');
 require('./src/utility/credentialsException.php');
 
 $page_title = 'Login';
+$redirect = false;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $username = $_POST['username'];
@@ -17,7 +18,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       
       $_SESSION['success_message'] = "Login successful!";
       $_SESSION['username'] = $username;
-      header('Location: profile.php');
+      
+      $redirect = true;
     } else {
       throw new InvalidCredentialsException();
     }
@@ -59,7 +61,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <a href="register.php" class="alert-link mt-2">Register here</a></div>
     </div>
   </div>
-  <script src="./src/utility/validation.js"></script>
+  <script src="./src/utility/scripts/validation.js"></script>
+  <?php if($redirect) { ?>
+    <script>
+      setTimeout(function() {
+        location.href = 'profile.php'
+      }, 2000)
+    </script>
+    <?php } ?>
 </body>
 
 </html>
