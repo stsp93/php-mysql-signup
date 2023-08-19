@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $statement->execute([$username]);
     $user = $statement->fetch(PDO::FETCH_ASSOC);
     
-    if($user && password_verify($password, $user['password'])) {
+    if($user && password_verify($password, $user['password_hash'])) {
       
       $_SESSION['success_message'] = "Login successful!";
       $_SESSION['username'] = $username;

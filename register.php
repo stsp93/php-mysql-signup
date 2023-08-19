@@ -6,14 +6,14 @@ $page_title='Register';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $username = $_POST['username'];
   $email = $_POST['email'];
-  $password = password_hash($_POST['password'], PASSWORD_BCRYPT, ['cost' => 10]);
+  $password_hash = password_hash($_POST['password'], PASSWORD_BCRYPT, ['cost' => 10]);
   $phone = $_POST['phone'];
 
   try {
-    $statement = $pdo->prepare("INSERT INTO users (username, email, password, phone) VALUES (?, ?, ?, ?)");
+    $statement = $pdo->prepare("INSERT INTO users (username, email, password_hash, phone) VALUES (?, ?, ?, ?)");
     $statement->bindParam(1, $username);
     $statement->bindParam(2, $email);
-    $statement->bindParam(3, $password);
+    $statement->bindParam(3, $password_hash);
     $statement->bindParam(4, $phone);
     $statement->execute();
     $_SESSION['success_message'] = "Registration successful!";
@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email">
       </div>
       <div class="mb-3">
-        <label for="phone" class="form-label">Phone number</label>
+        <label for="phone" class="form-label">Phone number (+359 --- --- ---)</label>
         <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter your phone number">
       </div>
       <div class="mb-3">
