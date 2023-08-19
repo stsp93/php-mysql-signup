@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       
       $_SESSION['success_message'] = "Login successful!";
       $_SESSION['username'] = $username;
-      header('Location: index.php');
+      header('Location: profile.php');
     } else {
       throw new InvalidCredentialsException();
     }
@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </form>
     <div>
       No account ?
-      <a href="<?='/'.basename(__DIR__). '/register.php'?>" class="alert-link mt-2">Register here</a></div>
+      <a href="register.php" class="alert-link mt-2">Register here</a></div>
     </div>
   </div>
   <script src="./src/utility/validation.js"></script>

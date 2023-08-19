@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <?php
     if (isset($_SESSION['success_message'])) {
         echo '<div class="alert alert-primary" role="alert"> '.
-        $_SESSION['success_message'] . ' <a href="/'.basename(__DIR__). '/login.php'.'" class="alert-link">Login here</a></div>';
+        $_SESSION['success_message'] . ' <a href="login.php" class="alert-link">Login here</a></div>';
         unset($_SESSION['success_message']);
     }elseif (isset($_SESSION['error_message'])) {
         echo '<div class="alert alert-danger" role="alert">' . $_SESSION['error_message'] . '</div>';
