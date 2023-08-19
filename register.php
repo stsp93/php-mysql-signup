@@ -42,15 +42,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <form method="post" action="register.php">
       <div class="mb-3">
         <label for="username" class="form-label">Username* (min 3 chars)</label>
-        <input type="text" class="form-control" id="username" name="username" placeholder="Enter your username">
+        <input type="text" class="form-control" id="username" name="username" placeholder="Enter your username" value="<?php if(isset($_POST['username'])) echo $username; ?>">
       </div>
       <div class="mb-3">
         <label for="email" class="form-label">Email address* (valid email)</label>
-        <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email">
+        <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" value="<?php if(isset($_POST['email'])) echo $email; ?>">
       </div>
       <div class="mb-3">
         <label for="phone" class="form-label">Phone number (+359 --- --- ---)</label>
-        <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter your phone number">
+        <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter your phone number" value="<?php if(isset($_POST['phone'])) echo $phone; ?>">
       </div>
       <div class="mb-3">
         <label for="password" class="form-label">Password* (min 3 chars)</label>
@@ -67,8 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <a href="<?='/'.basename(__DIR__). '/login.php'?>" class="alert-link mt-2">Login here</a></div>
     </div>
   </div>
-
-  <script src="./src/utility/validation.js"></script>
+  <script src="./src/utility/scripts/validation.js"></script>
 </body>
 
 </html>

@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <form method="post">
       <div class="mb-3">
         <label for="username" class="form-label">Username</label>
-        <input type="text" class="form-control" id="username" name="username" placeholder="Enter your username">
+        <input type="text" class="form-control" id="username" name="username" placeholder="Enter your username" value="<?php if(isset($_POST['username'])) echo $username; ?>">
       </div>
       <div class="mb-3">
         <label for="password" class="form-label">Password</label>
