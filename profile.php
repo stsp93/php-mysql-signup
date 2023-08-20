@@ -1,18 +1,19 @@
+<?php require('./src/utility/authenticate.php') ?>
+
 <?php
-session_start();
 require('./src/config/db.php');
 
-$page_title = 'Main Page';
+$page_title = 'Profile';
 
-if (!isset($_SESSION['username'])) {
+if (!isset($_SESSION['user_id'])) {
     header('Location: login.php'); // Redirect to the login page
     exit();
 }
 
-$username = $_SESSION['username'];
+$user_id = $_SESSION['user_id'];
 
-$statement = $pdo->prepare('SELECT * FROM users WHERE username = ?');
-$statement->execute([$username]);
+$statement = $pdo->prepare('SELECT username, email, phone FROM users WHERE user_id = ?');
+$statement->execute([$user_id]);
 
 $user = $statement->fetch(PDO::FETCH_ASSOC);
 ?>
@@ -25,8 +26,8 @@ $user = $statement->fetch(PDO::FETCH_ASSOC);
             <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
         </svg>
         <h2>Profile Information</h2>
-        <p>Username: <?php if(isset($user)) echo $user['username']; ?></p>
-        <p>Email: <?php if(isset($user)) echo $user['email']; ?></p>
+        <p>Username: <?php if(isset($user['username'])) echo $user['username']; ?></p>
+        <p>Email: <?php if($user['email']) echo $user['email']; ?></p>
         <p>Phone: <?php if(isset($user['phone'])) echo $user['phone']; ?></p>
         <a href="update-profile.php" class="btn btn-primary">Update Info</a>
         <a href="logout.php" class="btn btn-danger">Logout</a>

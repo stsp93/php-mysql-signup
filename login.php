@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if($user && password_verify($password, $user['password_hash'])) {
       
       $_SESSION['success_message'] = "Login successful!";
-      $_SESSION['username'] = $username;
+      $_SESSION['user_id'] = $user['user_id'];
       
       $redirect = true;
     } else {
