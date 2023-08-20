@@ -1,6 +1,6 @@
 $('form').on('submit', function (e) {
     const { username, password, rePassword, phone, email } = Object.fromEntries(new FormData(this));
-
+    console.log('submit');
     try {
         if (!validateLength(username)) {
             $('#username').addClass('border-danger');
@@ -12,14 +12,6 @@ $('form').on('submit', function (e) {
             $('#password').addClass('border-danger');
         }else {
             $('#password').removeClass('border-danger');
-        }
-
-        // Block guard for login submit
-        if(rePassword === undefined || phone === undefined || email === undefined )  {
-            if($('.border-danger').length > 0) {
-                throw new Error('Invalid login format');
-            }
-            return;
         }
 
         if (!validateEmail(email)) {
@@ -41,7 +33,7 @@ $('form').on('submit', function (e) {
         }
 
         if($('.border-danger').length > 0) {
-            throw new Error('Invalid register format');
+            throw new Error('Invalid format');
         }
     } catch (err) {
         console.error(err);
@@ -51,16 +43,19 @@ $('form').on('submit', function (e) {
 
 // Validation functions
 function validateLength(input) {
+    if(input === undefined) return;
     return input.length >= 3;
 }
 
 function validateEmail(email) {
+    if (email === undefined) return;
     const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     return emailRegex.test(email);
 }
 
 function validatePhone(phone) {
     if (phone === '') return true;
+    if (phone === undefined) return;
     const phoneRegex = /^\+[0-9]{1,3}[0-9]{4,14}$/;
     return phoneRegex.test(phone);
 }
