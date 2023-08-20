@@ -26,10 +26,10 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         $statement->execute(([$user_id]));
         $user = $statement->fetch(PDO::FETCH_ASSOC);
 
-        $_SESSION['success_message'] = 'Information updated successfuly';
+        $_SESSION['success_message'] = "Information updated successfully";
         $redirect = true;
     } catch (PDOException $e) {
-        $_SESSION['error_message'] = $e;
+        $_SESSION['error_message'] = $e->getMessage();
     }
 }
 
@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                 <input type="tel" class="form-control" id="phone" name="phone" value="<?php if (isset($user)) echo $user['phone']; ?>">
             </div>
             <button type="submit" class="btn btn-primary">Update Info</button>
-            <a href="profile.php" type="submit" class="btn btn-info">Back</a>
+            <a href="profile.php" class="btn btn-info">Back</a>
         </form>
 
         <hr>

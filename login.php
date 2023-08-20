@@ -2,10 +2,10 @@
 require('./src/config/db.php');
 require('./src/utility/credentialsException.php');
 
-$page_title = 'Login';
+$page_title = "Login";
 $redirect = false;
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === "POST") {
   $username = $_POST['username'];
   $password = $_POST['password'];
 
