@@ -71,6 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
         <h2>Chenge Password</h2>
         <a href="change-password.php" class="btn btn-primary">Change Password</a>
+        <a href="#" class="reset btn btn-warning">Reset Password</a>
 
     </div>
     <script src="./src/utility/scripts/validation.js"></script>
@@ -81,6 +82,11 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
             }, 2000)
         </script>
     <?php } ?>
+    <script>$('.reset').on('click', function() {
+        if(confirm('Are you sure?')) {
+            location.href = 'reset-password.php'
+        }
+    })</script>
 </body>
 
 </html>
