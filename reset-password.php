@@ -44,6 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
 ?>
 
+<?php include('./src/shared/header.php')  ?>
 <body>
     <?php
     if (isset($_SESSION['success_message'])) {
