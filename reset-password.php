@@ -14,7 +14,6 @@ function generateRandomPassword($length = 5)
     return $randomPassword;
 }
 
-
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
     session_start();
 
@@ -23,6 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
         $stmt = $pdo->prepare('SELECT * FROM users WHERE email = ?');
         $stmt->execute([$email]);
+
         $user_id = $stmt->fetch(PDO::FETCH_ASSOC)['user_id'];
 
         // Simulate sending email with the new password
@@ -43,8 +43,6 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 }
 
 ?>
-
-<?php include('./src/shared/header.php') ?>
 
 <body>
     <?php
