@@ -41,15 +41,15 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         <h2>Update Profile Information</h2>
         <form method="post">
             <div class="form-group">
-                <label for="username">Username:</label>
+                <label for="username">*Username: (min 3 chars)</label>
                 <input type="text" class="form-control" id="username" name="username" value="<?php if (isset($user)) echo $user['username']; ?>">
             </div>
             <div class="form-group">
-                <label for="email">Email:</label>
+                <label for="email">*Email: (valid mail)</label>
                 <input type="email" class="form-control" id="email" name="email" value="<?php if (isset($user)) echo $user['email']; ?>">
             </div>
             <div class="form-group">
-                <label for="phone">Phone:</label>
+                <label for="phone">Phone: (+123 123 123 123)</label>
                 <input type="tel" class="form-control" id="phone" name="phone" value="<?php if (isset($user)) echo $user['phone']; ?>">
             </div>
             <button type="submit" class="btn btn-primary">Update Info</button>
@@ -58,10 +58,8 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
         <hr>
 
-        <h2>Chenge Password</h2>
+        <h2>Change Password</h2>
         <a href="change-password.php" class="btn btn-primary">Change Password</a>
-        <a href="#" class="reset btn btn-warning">Reset Password</a>
-
     </div>
     <script src="./src/utility/scripts/clientValidation.js"></script>
     <?php if ($redirect) { ?>
@@ -71,11 +69,6 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
             }, 2000)
         </script>
     <?php } ?>
-    <script>$('.reset').on('click', function() {
-        if(confirm('Are you sure?')) {
-            location.href = 'reset-password.php'
-        }
-    })</script>
 </body>
 
 </html>

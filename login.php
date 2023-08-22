@@ -9,8 +9,8 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
   try {
     require('./src/utility/form-handler.php');
 
-    $statement = $pdo->prepare("SELECT * FROM users WHERE username = ?");
-    $statement->execute([$username]);
+    $statement = $pdo->prepare("SELECT * FROM users WHERE email = ?");
+    $statement->execute([$email]);
     $user = $statement->fetch(PDO::FETCH_ASSOC);
 
     if ($user && password_verify($password, $user['password_hash'])) {
@@ -36,8 +36,8 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     <h2>Login</h2>
     <form method="post">
       <div class="mb-3">
-        <label for="username" class="form-label">Username</label>
-        <input type="text" class="form-control" id="username" name="username" placeholder="Enter your username" value="<?php if (isset($_POST['username'])) echo $username; ?>">
+        <label for="email" class="form-label">Email</label>
+        <input type="text" class="form-control" id="email" name="email" placeholder="Enter your email" value="<?php if (isset($_POST['email'])) echo $email; ?>">
       </div>
       <div class="mb-3">
         <label for="password" class="form-label">Password</label>
