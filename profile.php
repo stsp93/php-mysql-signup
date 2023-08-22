@@ -16,6 +16,11 @@ $statement = $pdo->prepare('SELECT username, email, phone FROM users WHERE user_
 $statement->execute([$user_id]);
 
 $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+function sanitize($input) {
+    return htmlspecialchars($input);
+}
+$user = array_map('sanitize', $user);
 ?>
 
 <?php include('./src/shared/header.php')  ?>
