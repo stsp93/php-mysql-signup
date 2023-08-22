@@ -14,13 +14,11 @@ try {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
-    $newUsername = $_POST['username'];
-    $newEmail = $_POST['email'];
-    $newPhone = $_POST['phone'];
-
     try {
+        require('./src/utility/form-handler.php');
+
         $statement = $pdo->prepare("UPDATE users SET username = ?, email = ?, phone = ? WHERE user_id = ?");
-        $statement->execute([$newUsername, $newEmail, $newPhone, $user_id]);
+        $statement->execute([$username, $email, $phone, $user_id]);
 
         $statement = $pdo->prepare("SELECT * FROM users WHERE user_id = ?");
         $statement->execute(([$user_id]));
@@ -28,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
         $_SESSION['success_message'] = "Information updated successfully";
         $redirect = true;
-    } catch (PDOException $e) {
+    } catch (Exception $e) {
         $_SESSION['error_message'] = $e->getMessage();
     }
 }
@@ -65,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         <a href="#" class="reset btn btn-warning">Reset Password</a>
 
     </div>
-    <script src="./src/utility/scripts/validation.js"></script>
+    <script src="./src/utility/scripts/clientValidation.js"></script>
     <?php if ($redirect) { ?>
         <script>
             setTimeout(function() {

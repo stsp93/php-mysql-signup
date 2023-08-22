@@ -4,16 +4,16 @@ require('./src/config/db.php');
 $page_title = 'Register';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  $username = $_POST['username'];
-  $email = $_POST['email'];
-  $password_hash = password_hash($_POST['password'], PASSWORD_BCRYPT, ['cost' => 10]);
-  $phone = $_POST['phone'];
-
   try {
+  require('./src/utility/form-handler.php');
+
+  $password_hash = password_hash($password, PASSWORD_BCRYPT, ['cost' => 10]);
+
+
     $statement = $pdo->prepare("INSERT INTO users (username, email, password_hash, phone) VALUES (?, ?, ?, ?)");
     $statement->execute([$username,$email,$password_hash,$phone]);
     $_SESSION['success_message'] = "Registration successful!";
-  } catch (PDOException $e) {
+  } catch (Exception $e) {
     $_SESSION['error_message'] = "Registration failed: " . $e->getMessage();
   }
 }
@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
   </div>
   </div>
-  <script src="./src/utility/scripts/validation.js"></script>
+  <script src="./src/utility/scripts/clientValidation.js"></script>
 </body>
 
 </html>

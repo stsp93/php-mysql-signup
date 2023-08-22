@@ -1,5 +1,5 @@
 <?php require('./src/utility/authenticate.php') ?>
-<?php require('./src/utility/credentialsException.php') ?>
+<?php require('./src/utility/CredentialsException.php') ?>
 <?php
 require('./src/config/db.php');
 $page_title = "Reset password";
@@ -9,19 +9,16 @@ $redirect = false;
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
     try {
-        $stmt = $pdo->prepare("SELECT password_hash FROM users WHERE user_id = ?");
-        $stmt->execute([$user_id]);
-        $password_hash = $stmt->fetch(PDO::FETCH_ASSOC)['password_hash'];
+        require('./src/utility/form-handler.php');
 
-
-        $_SESSION['success_message'] = 'Successfully changed password';
-        $new_password_hash = password_hash($_POST['password'], PASSWORD_BCRYPT, ['cost' => 10]);
-
+        $new_password_hash = password_hash($password, PASSWORD_BCRYPT, ['cost' => 10]);
+        
         $stmt = $pdo->prepare("UPDATE users SET password_hash = ? WHERE user_id = ? ");
         $stmt->execute([$new_password_hash, $user_id]);
-
+        
+        $_SESSION['success_message'] = 'New password set';
         $redirect = true;
-    } catch (PDOException | InvalidCredentialsException $e) {
+    } catch (Exception $e) {
         $_SESSION['error_message'] = $e->getMessage();
     }
 }
@@ -33,6 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 <body>
 <?php include('./src/shared/alert-messages.php') ?>
     <div class="container">
+    <h2>Choose new password</h2>
         <form method="post">
             <div class="form-group">
                 <label for="password">New Password:</label>
@@ -46,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
             <a href="update-profile.php" class="btn btn-info">Back</a>
         </form>
     </div>
-    <script src="./src/utility/scripts/validation.js"></script>
+    <script src="./src/utility/scripts/clientValidation.js"></script>
     <?php if ($redirect) { ?>
         <script>
             setTimeout(function() {

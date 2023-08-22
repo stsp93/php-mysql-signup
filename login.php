@@ -1,15 +1,14 @@
 <?php session_start();
 require('./src/config/db.php');
-require('./src/utility/credentialsException.php');
+require('./src/utility/CredentialsException.php');
 
 $page_title = "Login";
 $redirect = false;
 
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
-  $username = $_POST['username'];
-  $password = $_POST['password'];
-
   try {
+    require('./src/utility/form-handler.php');
+
     $statement = $pdo->prepare("SELECT * FROM users WHERE username = ?");
     $statement->execute([$username]);
     $user = $statement->fetch(PDO::FETCH_ASSOC);
@@ -24,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
       throw new InvalidCredentialsException();
     }
 
-  } catch (PDOException | InvalidCredentialsException $e) {
+  } catch (Exception $e) {
     $_SESSION['error_message'] = "Login failed: " . $e->getMessage();
   }
 }
@@ -52,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
       <a href="register.php" class="alert-link mt-2">Register here</a></div>
     </div>
   </div>
-  <script src="./src/utility/scripts/validation.js"></script>
+  <script src="./src/utility/scripts/clientValidation.js"></script>
   <?php if($redirect) { ?>
     <script>
       setTimeout(function() {

@@ -1,5 +1,5 @@
 <?php require('./src/utility/authenticate.php') ?>
-<?php require('./src/utility/credentialsException.php') ?>
+<?php require('./src/utility/CredentialsException.php') ?>
 <?php
 require('./src/config/db.php');
 $page_title = "Change password";
@@ -10,13 +10,15 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
     $current_password = $_POST['current_password'];
     try {
+        require('./src/utility/form-handler.php');
+
         $stmt = $pdo->prepare("SELECT password_hash FROM users WHERE user_id = ?");
         $stmt->execute([$user_id]);
         $password_hash = $stmt->fetch(PDO::FETCH_ASSOC)['password_hash'];
 
         if (password_verify($current_password, $password_hash)) {
             $_SESSION['success_message'] = 'Successfully changed password';
-            $new_password_hash = password_hash($_POST['password'],PASSWORD_BCRYPT, ['cost' => 10]);
+            $new_password_hash = password_hash($password,PASSWORD_BCRYPT, ['cost' => 10]);
         } else {
             throw new InvalidCredentialsException('Invalid password');
         }
@@ -63,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
             <a href="update-profile.php" class="btn btn-info">Back</a>
         </form>
     </div>
-    <script src="./src/utility/scripts/validation.js"></script>
+    <script src="./src/utility/scripts/clientValidation.js"></script>
     <?php if ($redirect) { ?>
         <script>
             setTimeout(function() {
