@@ -12,19 +12,25 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 
-$statement = $pdo->prepare('SELECT username, email, phone FROM users WHERE user_id = ?');
-$statement->execute([$user_id]);
+try {
+    $statement = $pdo->prepare('SELECT username, email, phone FROM users WHERE user_id = ?');
+    $statement->execute([$user_id]);
 
-$user = $statement->fetch(PDO::FETCH_ASSOC);
-
-function sanitize($input) {
-    return htmlspecialchars($input);
+    $user = $statement->fetch(PDO::FETCH_ASSOC);
+    function sanitize($input) {
+        return htmlspecialchars($input);
+    }
+    $user = array_map('sanitize', $user);
+} catch(Exception $e) {
+    $_SESSION['error-message'] = $e->getMessage();
 }
-$user = array_map('sanitize', $user);
+
+
 ?>
 
 <?php include('./src/shared/header.php')  ?>
 <body>
+    <?php include('./src/shared/alert-messages.php') ?>
     <div class="container">
         <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
             <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
