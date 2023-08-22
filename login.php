@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
       <a href="register.php" class="alert-link mt-2">Register here</a>
     </div>
     <div>
-      Forgotten passord ?
+      Forgotten password ?
       <a href="reset-password.php" class="link-info mt-2">Reset password</a>
     </div>
   </div>

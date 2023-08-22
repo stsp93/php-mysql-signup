@@ -10,3 +10,10 @@ try {
 } catch (PDOException $e) {
     die("Connection failed: " . $e->getMessage());
 }
+
+
+function dd($input) {
+    echo '<pre>';
+    echo var_dump($input);
+    echo '</pre>';
+}
