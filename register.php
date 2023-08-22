@@ -1,7 +1,7 @@
 <?php session_start();
 require('./src/config/db.php');
 
-$page_title='Register';
+$page_title = 'Register';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $username = $_POST['username'];
@@ -11,11 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   try {
     $statement = $pdo->prepare("INSERT INTO users (username, email, password_hash, phone) VALUES (?, ?, ?, ?)");
-    $statement->bindParam(1, $username);
-    $statement->bindParam(2, $email);
-    $statement->bindParam(3, $password_hash);
-    $statement->bindParam(4, $phone);
-    $statement->execute();
+    $statement->execute([$username,$email,$password_hash,$phone]);
     $_SESSION['success_message'] = "Registration successful!";
   } catch (PDOException $e) {
     $_SESSION['error_message'] = "Registration failed: " . $e->getMessage();
@@ -24,33 +20,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 
 <?php include('./src/shared/header.php'); ?>
-
-
 <body>
-<?php
-    if (isset($_SESSION['success_message'])) {
-        echo '<div class="alert alert-primary" role="alert"> '.
-        $_SESSION['success_message'] . ' <a href="login.php" class="alert-link">Login here</a></div>';
-        unset($_SESSION['success_message']);
-    }elseif (isset($_SESSION['error_message'])) {
-        echo '<div class="alert alert-danger" role="alert">' . $_SESSION['error_message'] . '</div>';
-        unset($_SESSION['error_message']);
-    }
-    ?>
+  <?php
+  $loginAnchor = ' <a href="login.php" class="alert-link">Login here</a></div>';
+  include('./src/shared/alert-messages.php');
+  ?>
   <div class="container">
     <h2>Register</h2>
     <form method="post" action="register.php">
       <div class="mb-3">
         <label for="username" class="form-label">Username* (min 3 chars)</label>
-        <input type="text" class="form-control" id="username" name="username" placeholder="Enter your username" value="<?php if(isset($_POST['username'])) echo $username; ?>">
+        <input type="text" class="form-control" id="username" name="username" placeholder="Enter your username" value="<?php if (isset($_POST['username'])) echo $username; ?>">
       </div>
       <div class="mb-3">
         <label for="email" class="form-label">Email address* (valid email)</label>
-        <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" value="<?php if(isset($_POST['email'])) echo $email; ?>">
+        <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" value="<?php if (isset($_POST['email'])) echo $email; ?>">
       </div>
       <div class="mb-3">
         <label for="phone" class="form-label">Phone number (+359 --- --- ---)</label>
-        <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter your phone number" value="<?php if(isset($_POST['phone'])) echo $phone; ?>">
+        <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter your phone number" value="<?php if (isset($_POST['phone'])) echo $phone; ?>">
       </div>
       <div class="mb-3">
         <label for="password" class="form-label">Password* (min 3 chars)</label>
@@ -64,8 +52,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </form>
     <div>
       Already registered ?
-      <a href="<?='/'.basename(__DIR__). '/login.php'?>" class="alert-link mt-2">Login here</a></div>
+      <a href="<?= '/' . basename(__DIR__) . '/login.php' ?>" class="alert-link mt-2">Login here</a>
     </div>
+  </div>
   </div>
   <script src="./src/utility/scripts/validation.js"></script>
 </body>
