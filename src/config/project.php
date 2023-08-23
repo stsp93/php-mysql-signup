@@ -1,3 +1,3 @@
 <?php 
-$project_name = 'task6'
+$project_folder = 'php-mysql-signup'
 ?>

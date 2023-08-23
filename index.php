@@ -1,6 +1,6 @@
 <?php require('./src/config/project.php');
 
- $uri = str_replace('/'.$project_name.'/','', $_SERVER['REQUEST_URI'],) ;
+ $uri = str_replace('/'.$project_folder.'/','', $_SERVER['REQUEST_URI'],) ;
 
 
 
