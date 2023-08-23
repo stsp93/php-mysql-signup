@@ -1,6 +1,10 @@
 <?php
      // Alerts
 
+     if(!isset($additional)) {
+        $additional = '';
+     }
+
     if (isset($_SESSION['success_message'])) {
         echo '<div class="alert alert-primary" role="alert"> ' .
             $_SESSION['success_message'] .$additional. '</div>'; //$additional used for extra text or html 
