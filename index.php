@@ -1,4 +1,7 @@
-<?php require('./src/config/project.php');
+<?php 
+// Simple router
+
+require('./src/config/project.php'); //contains project folder name
 
  $uri = str_replace('/'.$project_folder.'/','', $_SERVER['REQUEST_URI'],) ;
 

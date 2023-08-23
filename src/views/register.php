@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <?php include('./src/shared/header.php'); ?>
 <body>
   <?php
-  $loginAnchor = ' <a href="login" class="alert-link">Login here</a></div>';
+  $additional = ' <a href="login" class="alert-link">Login here</a></div>';
   include('./src/shared/alert-messages.php');
   ?>
   <div class="container">

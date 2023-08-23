@@ -1,3 +1,5 @@
+// Abstract client-side form validation
+
 $('form').on('submit', function (e) {
     const { username, password, rePassword, phone, email } = Object.fromEntries(new FormData(this));
     console.log('submit');
