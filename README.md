@@ -7,8 +7,9 @@ This is a PHP & MySQL web application that includes user registration, login fun
 
 2. Clone the repository to xampp\htdocs\
 
-3. Configure Project Folder:
+3. Configure Project Folder (optional):
 - Open the config/db.php file and update the $projectFolder variable with the corresponding folder name on your local server (if needed).
+- Open the .htaccess in the main directory and change RewriteBase /php-mysql-signup/ with the corresponding folder name on your local server (if needed).
 
 4. Database Configuration:
 - Create database
