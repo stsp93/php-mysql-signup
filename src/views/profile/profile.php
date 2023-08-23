@@ -6,7 +6,7 @@ require('./src/config/db.php');
 $page_title = 'Profile';
 
 if (!isset($_SESSION['user_id'])) {
-    header('Location: login.php'); // Redirect to the login page
+    header('Location: login'); // Redirect to the login page
     exit();
 }
 
@@ -40,8 +40,8 @@ try {
         <p>Username: <?php if(isset($user['username'])) echo $user['username']; ?></p>
         <p>Email: <?php if($user['email']) echo $user['email']; ?></p>
         <p>Phone: <?php if(isset($user['phone'])) echo $user['phone']; ?></p>
-        <a href="update-profile.php" class="btn btn-primary">Update Info</a>
-        <a href="logout.php" class="btn btn-danger">Logout</a>
+        <a href="update-profile" class="btn btn-primary">Update Info</a>
+        <a href="logout" class="btn btn-danger">Logout</a>
     </div>
 </body>
 

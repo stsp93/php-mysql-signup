@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     } catch (Exception $e) {
         $_SESSION['error_message'] = $e->getMessage();
     }
-    header('Location: login.php');
+    header('Location: login');
     exit();
 }
 
@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                 <input type="email" class="form-control" id="email" name="email">
             </div>
             <button type="submit" class="btn btn-primary reset">Reset Password</button>
-            <a href="login.php" class="btn btn-info">Back</a>
+            <a href="login" class="btn btn-info">Back</a>
         </form>
     </div>
     <script src="./src/utility/scripts/clientValidation.js"></script>

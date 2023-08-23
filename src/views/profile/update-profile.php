@@ -9,7 +9,7 @@ try {
     $statement->execute(([$user_id]));
     $user = $statement->fetch(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
-    header('Location: login.php');
+    header('Location: login');
     exit();
 }
 
@@ -53,19 +53,19 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                 <input type="tel" class="form-control" id="phone" name="phone" value="<?php if (isset($user)) echo $user['phone']; ?>">
             </div>
             <button type="submit" class="btn btn-primary">Update Info</button>
-            <a href="profile.php" class="btn btn-info">Back</a>
+            <a href="profile" class="btn btn-info">Back</a>
         </form>
 
         <hr>
 
         <h2>Change Password</h2>
-        <a href="change-password.php" class="btn btn-primary">Change Password</a>
+        <a href="change-password" class="btn btn-primary">Change Password</a>
     </div>
     <script src="./src/utility/scripts/clientValidation.js"></script>
     <?php if ($redirect) { ?>
         <script>
             setTimeout(function() {
-                location.href = 'profile.php'
+                location.href = 'profile'
             }, 2000)
         </script>
     <?php } ?>

@@ -62,14 +62,14 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                 <input type="password" class="form-control" id="rePassword" name="rePassword">
             </div>
             <button name="change-password" type="submit" class="btn btn-primary">Change Password</button>
-            <a href="update-profile.php" class="btn btn-info">Back</a>
+            <a href="update-profile" class="btn btn-info">Back</a>
         </form>
     </div>
     <script src="./src/utility/scripts/clientValidation.js"></script>
     <?php if ($redirect) { ?>
         <script>
             setTimeout(function() {
-                location.href = 'update-profile.php'
+                location.href = 'update-profile'
             }, 2000)
         </script>
     <?php } ?>

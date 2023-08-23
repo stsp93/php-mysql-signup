@@ -47,11 +47,11 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     </form>
     <div>
       No account ?
-      <a href="register.php" class="alert-link mt-2">Register here</a>
+      <a href="register" class="alert-link mt-2">Register here</a>
     </div>
     <div>
       Forgotten password ?
-      <a href="reset-password.php" class="link-info mt-2">Reset password</a>
+      <a href="reset-password" class="link-info mt-2">Reset password</a>
     </div>
   </div>
   </div>
@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
   <?php if ($redirect) { ?>
     <script>
       setTimeout(function() {
-        location.href = 'profile.php'
+        location.href = 'profile'
       }, 2000)
     </script>
   <?php } ?>

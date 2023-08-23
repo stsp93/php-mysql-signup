@@ -22,12 +22,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <?php include('./src/shared/header.php'); ?>
 <body>
   <?php
-  $loginAnchor = ' <a href="login.php" class="alert-link">Login here</a></div>';
+  $loginAnchor = ' <a href="login" class="alert-link">Login here</a></div>';
   include('./src/shared/alert-messages.php');
   ?>
   <div class="container">
     <h2>Register</h2>
-    <form method="post" action="register.php">
+    <form method="post">
       <div class="mb-3">
         <label for="username" class="form-label">Username* (min 3 chars)</label>
         <input type="text" class="form-control" id="username" name="username" placeholder="Enter your username" value="<?php if (isset($_POST['username'])) echo $username; ?>">
@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </form>
     <div>
       Already registered ?
-      <a href="<?= '/' . basename(__DIR__) . '/login.php' ?>" class="alert-link mt-2">Login here</a>
+      <a href="login" class="alert-link mt-2">Login here</a>
     </div>
   </div>
   </div>

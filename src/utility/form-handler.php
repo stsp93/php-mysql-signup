@@ -14,8 +14,8 @@
   }
   if(isset($_POST['phone'])) {
     $phone = $_POST['phone'];
-    $phonePattern = '/^\+[0-9]{1,3}[0-9]{4,14}$/';
-    if($phone !== "" && !preg_match($phone, $phonePattern)) array_push($invalidInputs, 'phone');
+    $phonePattern = '/^\+[0-9]{1,3}[0-9]{4,14}/';
+    if($phone !== "" && !preg_match( $phonePattern,$phone)) array_push($invalidInputs, 'phone');
   }
   if(isset($_POST['password'])) {
     $password = $_POST['password'];
